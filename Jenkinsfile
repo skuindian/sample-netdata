@@ -7,7 +7,14 @@ pipeline
 		{
 			steps
 			{
-				echo "Building..."
+				echo "Building the code..."
+			}	
+		}
+		stage ("deploy")
+		{
+			steps
+			{
+				echo "Deploying into container..."
 			}	
 		}
 		stage ("netdata-init")
@@ -21,7 +28,7 @@ pipeline
 		{
 			steps
 			{
-				echo "Starting test..."
+				echo "Starting test execution..."
 			}	
 		}
 		stage ("netdat-end")
@@ -29,7 +36,7 @@ pipeline
 			steps
 			{
 				echo "Capturing netdata report..."
-			}	
+			}
 		}
 	}
 }
