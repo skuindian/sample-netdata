@@ -31,7 +31,7 @@ pipeline
 				echo "Starting test execution..."
 			}	
 		}
-		stage ("netdat-end")
+		stage ("netdata-end")
 		{
 			steps
 			{
