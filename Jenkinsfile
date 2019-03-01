@@ -23,12 +23,43 @@ pipeline
 			steps
 			{
 				echo "Deleting older report..."
-				
-				bash '''#!/bin/bash
-				rm -rf /home/saurabh/Downloads/netdata/*
-				'''				
+				sh "rm -rf /home/saurabh/Downloads/netdata/*"
 				echo "Starting netdata..."
 			}	
+		}
+		stage ("test")
+		{
+			steps
+			{
+				echo "Starting test execution..."
+			}	
+		}
+		stage ("netdata-capture")
+		{
+			steps
+			{
+				echo "Capturing netdata report..."
+				sh "python3 /home/saurabh/PycharmProjects/netdata/netdata.py"
+			}
+		}
+		stage ("archive-report")
+		{
+			steps
+			{
+				echo "Archiving netdata report..."
+				sh """
+					cd /home/saurabh/Downloads/netdata/
+					tar -cvf netdata.tar *
+					echo "Artifact Location is:" ${env.WORKSPACE}
+				"""
+			}
+		}
+		stage ("netdata-end")
+		{
+			steps
+			{
+				echo "Ending netdata..."
+			}
 		}
 	}
 }
