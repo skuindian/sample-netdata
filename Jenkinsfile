@@ -25,6 +25,8 @@ pipeline
 				echo "Deleting older report..."
 				sh """
 					rm -rf /home/saurabh/Downloads/netdata/*
+					killall netdata &
+					/usr/sbin/netdata &
 				"""
 				echo "Starting netdata..."
 			}	
@@ -52,10 +54,9 @@ pipeline
 			{
 				echo "Archiving netdata report..."
 				sh """
-					cd /home/saurabh/Downloads/netdata/
 					echo "Artifact Location is:" ${env.WORKSPACE} ${env.BUILD_ID}
 					mkdir -p ${env.WORKSPACE}/reports/${env.BUILD_ID}
-					cp -rf /home/saurabh/Downloads/netdata/* ${env.WORKSPACE}/reports/${env.BUILD_ID}
+					cp -rf /home/saurabh/Downloads/netdata/* ${env.WORKSPACE}/reports/${env.BUILD_ID}/
 				"""
 			}
 		}
@@ -64,6 +65,7 @@ pipeline
 			steps
 			{
 				echo "Ending netdata..."
+				killall netdata &
 			}
 		}
 	}
