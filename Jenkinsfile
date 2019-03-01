@@ -25,9 +25,39 @@ pipeline
 				echo "Deleting older report..."
 				rm -rf /home/saurabh/Downloads/netdata/*
 				echo "Starting netdata..."
-				#killall netdata &
-				#/usr/sbin/netdata &
 			}	
+		}
+		stage ("test")
+		{
+			steps
+			{
+				echo "Starting test execution..."
+			}	
+		}
+		stage ("netdata-capture")
+		{
+			steps
+			{
+				echo "Capturing netdata report..."
+				python3 /home/saurabh/PycharmProjects/netdata/netdata.py
+			}
+		}
+		stage ("archive-report")
+		{
+			steps
+			{
+				echo "Archiving netdata report..."
+				cd /home/saurabh/Downloads/netdata/
+				tar -cvf netdata.tar *
+				echo "Artifact Location is:" ${env.WORKSPACE}
+			}
+		}
+		stage ("netdata-end")
+		{
+			steps
+			{
+				echo "Ending netdata..."
+			}
 		}
 	}
 }
