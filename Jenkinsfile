@@ -18,6 +18,16 @@ pipeline
 				echo "Deploying into container..."
 			}	
 		}
-
+		stage ("netdata-init")
+		{
+			steps
+			{
+				echo "Deleting older report..."
+				rm -rf /home/saurabh/Downloads/netdata/*
+				echo "Starting netdata..."
+				#killall netdata &
+				#/usr/sbin/netdata &
+			}	
+		}
 	}
 }
