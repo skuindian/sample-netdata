@@ -39,7 +39,7 @@ pipeline
 			steps
 			{
 				echo "Capturing netdata report..."
-				sh "python3 /home/saurabh/PycharmProjects/netdata/netdata.py"
+				sh "/usr/bin/python3 /home/saurabh/PycharmProjects/netdata/netdata.py"
 			}
 		}
 		stage ("archive-report")
