@@ -7,7 +7,7 @@ pipeline
 		{
 			steps
 			{
-				echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+				echo "Running Jenkin Job ID:${env.BUILD_ID} on ${env.JENKINS_URL}"
 				echo "Building the code..."
 			}	
 		}
@@ -23,7 +23,7 @@ pipeline
 			steps
 			{
 				echo "Deleting older report..."
-				sh "rm -rf /home/saurabh/Downloads/netdata/*"
+				sh 'rm -rf /home/saurabh/Downloads/netdata/*'
 				echo "Starting netdata..."
 			}	
 		}
@@ -39,7 +39,10 @@ pipeline
 			steps
 			{
 				echo "Capturing netdata report..."
-				sh "/usr/bin/python3 /home/saurabh/PycharmProjects/netdata/netdata.py"
+				sh '''
+					pip3 install selenium --proxy=194.138.0.25:9400
+					sh "/usr/bin/python3 /home/saurabh/PycharmProjects/netdata/netdata.py"
+				'''
 			}
 		}
 		stage ("archive-report")
@@ -50,7 +53,7 @@ pipeline
 				sh """
 					cd /home/saurabh/Downloads/netdata/
 					tar -cvf netdata.tar *
-					echo "Artifact Location is:" ${env.WORKSPACE}
+					echo "Artifact Location is:" ${env.WORKSPACE} ${env.BUILD_ID}
 				"""
 			}
 		}
