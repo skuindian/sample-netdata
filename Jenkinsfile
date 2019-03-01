@@ -41,7 +41,7 @@ pipeline
 				echo "Capturing netdata report..."
 				sh '''
 					pip3 install selenium --proxy=194.138.0.25:9400
-					sh "/usr/bin/python3 /home/saurabh/PycharmProjects/netdata/netdata.py"
+					/usr/bin/python3 /home/saurabh/PycharmProjects/netdata/netdata.py
 				'''
 			}
 		}
