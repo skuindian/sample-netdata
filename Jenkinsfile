@@ -26,7 +26,7 @@ pipeline
 				sh """
 					sudo rm -rf /home/saurabh/Downloads/netdata/*
 					sudo service netdata stop
-					sudo admin service netdata start
+					sudo service netdata start
 				"""
 				echo "Starting netdata..."
 			}	
