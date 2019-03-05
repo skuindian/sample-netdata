@@ -24,9 +24,9 @@ pipeline
 			{
 				echo "Deleting older report, stopping/starting netdata..."
 				sh """
-					sudo -u admin rm -rf /home/saurabh/Downloads/netdata/*
-					sudo -u admin service netdata stop
-					sudo -u admin service netdata start
+					sudo rm -rf /home/saurabh/Downloads/netdata/*
+					sudo service netdata stop
+					sudo admin service netdata start
 				"""
 				echo "Starting netdata..."
 			}	
@@ -66,7 +66,7 @@ pipeline
 			{
 				echo "Stopping netdata..."
 				sh '''
-					sudo -u admin service netdata stop
+					sudo -u service netdata stop
 				'''
 			}
 		}
