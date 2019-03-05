@@ -22,11 +22,11 @@ pipeline
 		{
 			steps
 			{
-				echo "Deleting older report..."
+				echo "Deleting older report, stopping/starting netdata..."
 				sh """
-					rm -rf /home/saurabh/Downloads/netdata/*
-					killall netdata &
-					/usr/sbin/netdata &
+					sudo -u admin rm -rf /home/saurabh/Downloads/netdata/*
+					sudo -u admin service netdata stop
+					sudo -u admin service netdata start
 				"""
 				echo "Starting netdata..."
 			}	
@@ -64,8 +64,8 @@ pipeline
 		{
 			steps
 			{
-				echo "Ending netdata..."
-				killall netdata &
+				echo "Stopping netdata..."
+				sudo -u admin service netdata stop
 			}
 		}
 	}
