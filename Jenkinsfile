@@ -74,7 +74,7 @@ pipeline
 			{
 				echo "Stopping netdata..."
 				sh '''
-					sudo -u service netdata stop
+					sudo service netdata stop
 				'''
 			}
 		}
