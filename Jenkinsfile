@@ -65,7 +65,9 @@ pipeline
 			steps
 			{
 				echo "Stopping netdata..."
-				sudo -u admin service netdata stop
+				sh '''
+					sudo -u admin service netdata stop
+				'''
 			}
 		}
 	}
