@@ -1,6 +1,9 @@
 pipeline
 {
 	agent	any
+    parameters {
+		password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter root password')
+	}
 	stages
 	{
 		stage ("build")
@@ -16,6 +19,11 @@ pipeline
 			steps
 			{
 				echo "Deploying into container..."
+				withCredentials([usernamePassword(credentialsId: 'SA_EDGE_ROOT', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+					sh """
+						echo "User Name:" ${USER} ", Password:" ${PASS}
+					"""
+				}
 			}	
 		}
 		stage ("netdata-init")
